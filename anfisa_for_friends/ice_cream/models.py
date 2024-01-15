@@ -1,40 +1,28 @@
 from django.db import models
-'''
-from django.core.validators import MaxValueValidator, MinValueValidator
-class Category(models.Model):
-    title = models.CharField(max_length=256)
-    slug = models.SlugField(max_length=64, unique=True)
-    output_order = models.PositiveIntegerField(
-        default=100,
-        validators=[MinValueValidator(0), MaxValueValidator(32767)])
-    is_published = models.BooleanField(default=True)
-'''
+from core.models import PublishedModel
 
 
 # Категории.
-class Category(models.Model):
-    is_published = models.BooleanField(default=True)
+class Category(PublishedModel):
     title = models.CharField(max_length=256)
     slug = models.SlugField(max_length=64, unique=True)
     output_order = models.PositiveSmallIntegerField(default=100)
 
 
 # Топпинги.
-class Topping(models.Model):
-    is_published = models.BooleanField(default=True)
+class Topping(PublishedModel):
     title = models.CharField(max_length=256)
     slug = models.SlugField(max_length=64, unique=True)
 
 
 # Обёртки.
-class Wrapper(models.Model):
+class Wrapper(PublishedModel):
     is_published = models.BooleanField(default=True)
     title = models.CharField(max_length=256)
 
 
 # Сорта мороженого.
-class IceCream(models.Model):
-    is_published = models.BooleanField(default=True)
+class IceCream(PublishedModel):
     is_on_main = models.BooleanField(default=False)
     title = models.CharField(max_length=256)
     description = models.TextField()
@@ -53,6 +41,15 @@ class IceCream(models.Model):
         Topping
     )
 
+
+'''
+from django.core.validators import MaxValueValidator, MinValueValidator
+
+class Category(models.Model):
+    output_order = models.PositiveIntegerField(
+        default=100,
+        validators=[MinValueValidator(0), MaxValueValidator(32767)])
+'''
 
 # 1
 '''
